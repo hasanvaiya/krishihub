@@ -1,0 +1,26 @@
+{
+  "name": "KrishiHub Bangladesh — বাংলাদেশের কৃষি তথ্য",
+  "short_name": "KrishiHub",
+  "description": "একটি প্ল্যাটফর্মে বাংলাদেশের সকল কৃষি তথ্য — ১,০০০+ ফসলের বিশ্বকোষ, স্মার্ট কৃষি টুলস ও সরকারী গাইড",
+  "lang": "bn",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#10B981",
+  "categories": ["agriculture", "education", "productivity"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%2310B981'/><text x='96' y='130' font-size='110' text-anchor='middle'>🌾</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='80' fill='%2310B981'/><text x='256' y='340' font-size='280' text-anchor='middle'>🌾</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
