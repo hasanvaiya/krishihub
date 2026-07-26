@@ -265,10 +265,21 @@ function renderHome() {
   // already in HTML
 }
 
-// ===== CROP ENCYCLOPEDIA =====
-function renderEncyclopedia() {
+// ===== CROP ENCYCLOPEDIA (1,000+ GLOBAL CROPS ENGINE) =====
+let encyclopediaLimit = 48;
+
+function loadMoreCrops() {
+  encyclopediaLimit += 48;
+  renderEncyclopedia(true);
+}
+
+function renderEncyclopedia(keepLimit = false) {
   const container = document.getElementById('encyclopediaGrid');
   if (!container) return;
+
+  if (!keepLimit) {
+    encyclopediaLimit = 48;
+  }
   
   const filtered = CROPS.filter(c => {
     if (App.cropFilter.search) {
@@ -277,42 +288,60 @@ function renderEncyclopedia() {
           !(c.en && c.en.toLowerCase().includes(s)) &&
           !(c.sci && c.sci.toLowerCase().includes(s))) return false;
     }
-    if (App.cropFilter.season && c.season !== App.cropFilter.season) return false;
-    if (App.cropFilter.district) {
-      const d = DISTRICTS.find(x => x.en === App.cropFilter.district);
-      if (d && !d.crops.some(dc => c.name.includes(dc) || dc.includes(c.name))) {
-        // loose match - don't exclude if no direct match
-      }
-    }
+    if (App.cropFilter.season && (!c.season || !c.season.includes(App.cropFilter.season))) return false;
     return true;
   });
   
   if (filtered.length === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-icon">🌾</div><p>কোনো ফসল পাওয়া যায়নি। ফিল্টার পরিবর্তন করে দেখুন।</p></div>';
+    container.innerHTML = '<div class="empty-state" style="grid-column:1/-1;text-align:center;padding:40px;"><div class="empty-icon" style="font-size:3rem">🌾</div><p style="color:var(--text-muted);font-weight:600;margin-top:10px;">কোনো ফসল পাওয়া যায়নি। অনুসন্ধান বা ফিল্টার পরিবর্তন করে দেখুন।</p></div>';
+    const countEl = document.getElementById('cropCount');
+    if (countEl) countEl.textContent = `০টি ফসল (মোট ${CROPS.length.toLocaleString('bn-BD')}+ বিশ্ব ডাটাবেস থেকে)`;
     return;
   }
+
+  const visibleItems = filtered.slice(0, encyclopediaLimit);
   
-  container.innerHTML = filtered.map(c => `
+  const cardsHtml = visibleItems.map(c => `
     <div class="crop-card" onclick="openCropModal('${c.id}')">
-      <div class="crop-name">${c.name}</div>
-      <div class="crop-scientific">${c.sci || c.en || ''}</div>
-      <div class="crop-tags">
-        ${c.season ? `<span class="crop-tag">${c.season}</span>` : ''}
-        ${c.cat ? `<span class="crop-tag">${c.cat}</span>` : ''}
-        ${c.yield ? `<span class="crop-tag">📊 ${c.yield.split(' ')[0]}</span>` : ''}
+      <div class="crop-header">
+        <div>
+          <div class="crop-name">${c.name}</div>
+          <div class="crop-sci">${c.sci || c.en || ''}</div>
+        </div>
+        <span class="badge badge-accent">${c.season || 'সাধারণ'}</span>
+      </div>
+      <div class="crop-meta" style="margin-top:auto;padding-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+        <span class="badge badge-neutral">📂 ${c.cat || 'ফসল'}</span>
+        ${c.yield ? `<span class="badge badge-neutral">📊 ${c.yield.split(' ')[0]}</span>` : ''}
+        ${c.price ? `<span class="badge badge-warning">💰 ${c.price}</span>` : ''}
       </div>
     </div>
   `).join('');
+
+  let loadMoreHtml = '';
+  if (filtered.length > encyclopediaLimit) {
+    loadMoreHtml = `
+      <div style="grid-column:1/-1;text-align:center;margin-top:24px;margin-bottom:12px;">
+        <button class="btn btn-primary btn-lg" onclick="loadMoreCrops()">
+          📥 আরও ফসল দেখুন (${(filtered.length - encyclopediaLimit).toLocaleString('bn-BD')}টি ফসল বাকি)
+        </button>
+      </div>
+    `;
+  }
+  
+  container.innerHTML = cardsHtml + loadMoreHtml;
   
   const countEl = document.getElementById('cropCount');
-  if (countEl) countEl.textContent = `${filtered.length} টি ফসল (মোট ${CROPS.length}+ ডাটাবেস থেকে)`;
+  if (countEl) {
+    countEl.textContent = `${filtered.length.toLocaleString('bn-BD')}টি ফসল (মোট ${CROPS.length.toLocaleString('bn-BD')}+ বিশ্ব ডাটাবেস থেকে)`;
+  }
 }
 
 function filterCrops() {
   App.cropFilter.search = document.getElementById('cropSearch')?.value || '';
   App.cropFilter.season = document.getElementById('filterSeason')?.value || '';
   App.cropFilter.district = document.getElementById('filterDistrict')?.value || '';
-  renderEncyclopedia();
+  renderEncyclopedia(false);
 }
 
 // ===== Crop Detail Modal =====
