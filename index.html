@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="KrishiHub Bangladesh — একটি প্ল্যাটফর্মে বাংলাদেশের সকল কৃষি তথ্য। ১,০০০+ ফসলের বিশ্বকোষ, স্মার্ট কৃষি টুলস, বাজার ব্যবস্থাপনা ও সরকারী কৃষি গাইড।">
+  <meta name="theme-color" content="#10B981">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="KrishiHub">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:; font-src 'self' https: fonts.gstatic.com;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>KrishiHub Bangladesh — বাংলাদেশের সকল প্রাতিষ্ঠানিক কৃষি তথ্য</title>
+  <style>
+    /* Search dropdown */
+    .search-dropdown {
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+      max-height: 320px; overflow-y: auto; z-index: 60; display: none;
+      margin-top: 4px;
+    }
+    .search-item {
+      padding: 10px 14px; cursor: pointer; display: flex; flex-direction: column;
+      border-bottom: 1px solid var(--border-light); transition: background 120ms;
+    }
+    .search-item:hover { background: var(--bg-hover); }
+    .search-item-name { font-weight: 500; font-size: 0.87rem; }
+    .search-item-sci { font-size: 0.75rem; color: var(--text-tertiary); font-style: italic; }
+    .search-item-empty { padding: 16px; text-align: center; color: var(--text-tertiary); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<div class="app-container">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="#" class="sidebar-logo" onclick="navigateTo('home');return false;">
+        <span class="logo-icon">🌾</span>
+        <div>
+          <span class="logo-text">KrishiHub <span class="logo-ver">PRO</span></span>
+          <span class="logo-sub">বাংলাদেশের প্রাতিষ্ঠানিক কৃষি তথ্য</span>
+        </div>
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">প্রধান</div>
+        <button class="nav-item active" data-page="home"><span class="nav-icon">🏠</span> হোম</button>
+        <button class="nav-item" data-page="encyclopedia"><span class="nav-icon">📖</span> ক্রপ এনসাইক্লোপিডিয়া <span class="nav-badge">১০৫৮+</span></button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">কৃষি ব্যবস্থাপনা</div>
+        <button class="nav-item" data-page="marketplace"><span class="nav-icon">🛒</span> পাইকারি বাজার</button>
+        <button class="nav-item" data-page="invoice"><span class="nav-icon">🧾</span> ক্যাশ মেমো</button>
+        <button class="nav-item" data-page="articles"><span class="nav-icon">📚</span> গবেষণা নিবন্ধ</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">সরকারী গাইড</div>
+        <button class="nav-item" data-page="handbook"><span class="nav-icon">📘</span> DAE হ্যান্ডবুক</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">স্মার্ট টুলস (PHASE ১)</div>
+        <button class="nav-item" data-page="planner"><span class="nav-icon">🎯</span> ফসল প্ল্যানার</button>
+        <button class="nav-item" data-page="timeline"><span class="nav-icon">📅</span> চাষাবাদ টাইমলাইন</button>
+        <button class="nav-item" data-page="calculator"><span class="nav-icon">🧮</span> খরচ-লাভ ক্যালকুলেটর</button>
+        <button class="nav-item" data-page="diary"><span class="nav-icon">📔</span> কৃষি ডায়েরি</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">ম্যাপ ও গাইড (PHASE ২)</div>
+        <button class="nav-item" data-page="map"><span class="nav-icon">🗺️</span> ৬৪ জেলা ক্রপ ম্যাপ</button>
+        <button class="nav-item" data-page="calendar"><span class="nav-icon">📆</span> ১২ মাস ক্যালেন্ডার</button>
+        <button class="nav-item" data-page="export"><span class="nav-icon">🌍</span> রপ্তানি গাইড</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">বিশ্বকোষ (PHASE ৩)</div>
+        <button class="nav-item" data-page="diseases"><span class="nav-icon">🦠</span> রোগবালাই বিশ্বকোষ</button>
+        <button class="nav-item" data-page="pests"><span class="nav-icon">🐛</span> পোকা-মাকড় বিশ্বকোষ</button>
+        <button class="nav-item" data-page="timber"><span class="nav-icon">🌳</span> বৃক্ষ ও বনজ</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">পরিমাপক (PHASE ৪)</div>
+        <button class="nav-item" data-page="converter"><span class="nav-icon">📐</span> জমি পরিমাপক</button>
+        <button class="nav-item" data-page="storage"><span class="nav-icon">📦</span> সংরক্ষণ গাইড</button>
+        <button class="nav-item" data-page="glossary"><span class="nav-icon">🔤</span> A-Z জ্ঞানভাণ্ডার</button>
+      </div>
+
+    </nav>
+  </aside>
+
+  <!-- ===== MAIN AREA ===== -->
+  <div class="main-wrapper">
+
+    <!-- Header -->
+    <header class="app-header">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <div class="header-search">
+        <input type="text" id="globalSearch" placeholder="ফসল খুঁজুন... (বাংলা/English/Scientific)">
+      </div>
+      <div class="header-actions">
+        <button class="header-btn" onclick="navigateTo('encyclopedia')">📖 এনসাইক্লোপিডিয়া</button>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </header>
+
+    <!-- Live Auto-Update Ticker -->
+    <div class="live-ticker-bar" id="liveTickerBar">
+      <div class="ticker-badge">
+        <span class="live-pulse"></span>
+        <span class="ticker-status-text">লাইভ সিঙ্ক চালু</span>
+      </div>
+      <div class="ticker-wrapper">
+        <div class="ticker-content" id="liveTickerContent">
+          🌾 লাইভ কৃষি তথ্য সিঙ্ক সক্রিয়... আবহাওয়া ডিরেক্টরি ও পাইকারি বাজার দর কানেক্ট করা হচ্ছে...
+        </div>
+      </div>
+      <div class="ticker-controls">
+        <span class="ticker-time" id="tickerLastUpdate">আপডেট: এইমাত্র</span>
+        <button class="ticker-btn" onclick="forceLiveSync()" title="তাত্ক্ষণিক সিঙ্ক">🔄 সিঙ্ক করুন</button>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Content -->
+    <main class="content-area">
+
+      <!-- ===== HOME PAGE ===== -->
+      <div class="page active" id="page-home">
+        <div class="hero">
+          <h1>🌾 KrishiHub Bangladesh</h1>
+          <p>"একটি প্ল্যাটফর্মে বাংলাদেশের সকল কৃষি তথ্য"</p>
+          <button class="btn btn-primary btn-lg" onclick="navigateTo('encyclopedia')">📖 ক্রপ এনসাইক্লোপিডিয়া দেখুন</button>
+          <div class="hero-stats">
+            <div class="hero-stat"><div class="hs-num">১,০৫৮+</div><div class="hs-label">ফসলের ডাটাবেস</div></div>
+            <div class="hero-stat"><div class="hs-num">৬৪</div><div class="hs-label">জেলার তথ্য</div></div>
+            <div class="hero-stat"><div class="hs-num">২২</div><div class="hs-label">প্রতি ফসলে তথ্য বিভাগ</div></div>
+            <div class="hero-stat"><div class="hs-num">৮</div><div class="hs-label">মডিউল</div></div>
+          </div>
+        </div>
+
+        <div class="section-title">🚀 মডিউলসমূহ</div>
+        <div class="card-grid card-grid-3">
+          <div class="feature-card" onclick="navigateTo('encyclopedia')">
+            <div class="fc-icon">📖</div>
+            <div class="fc-title">ক্রপ এনসাইক্লোপিডিয়া</div>
+            <div class="fc-desc">১,০৫৮টি ফসলের সম্পূর্ণ তথ্য — ২২টি বিভাগে পরিচিতি, চাষাবাদ, সার, সেচ, রোগবালাই ও বাজার মূল্য।</div>
+          </div>
+          <div class="feature-card" onclick="navigateTo('marketplace')">
+            <div class="fc-icon">🛒</div>
+            <div class="fc-title">কৃষি বাজার ব্যবস্থাপনা</div>
+            <div class="fc-desc">ফসল কেনাবেচা ও ১-ক্লিক ক্যাশ মেমো।</div>
+          </div>
+          <div class="feature-card" onclick="navigateTo('handbook')">
+            <div class="fc-icon">📘</div>
+            <div class="fc-title">সরকারী DAE হ্যান্ডবুক</div>
+            <div class="fc-desc">১২ মাসের অফিসিয়াল কৃষি কাজ নির্দেশিকা, বীজ হার সারণি ও জরুরি হটলাইন।</div>
+          </div>
+          <div class="feature-card" onclick="navigateTo('planner')">
+            <div class="fc-icon">🎯</div>
+            <div class="fc-title">স্মার্ট ফসল প্ল্যানার</div>
+            <div class="fc-desc">জেলা, মাটি, জমি ও মৌসুম অনুযায়ী সবচেয়ে লাভজনক ফসল নির্বাচন।</div>
+          </div>
+          <div class="feature-card" onclick="navigateTo('map')">
+            <div class="fc-icon">🗺️</div>
+            <div class="fc-title">৬৪ জেলা ক্রপ ম্যাপ</div>
+            <div class="fc-desc">বাংলাদেশের প্রতিটি জেলার প্রধান ফসল, মাটির ধরণ ও উৎপাদন তথ্য।</div>
+          </div>
+          <div class="feature-card" onclick="navigateTo('diseases')">
+            <div class="fc-icon">🦠</div>
+            <div class="fc-title">রোগবালাই বিশ্বকোষ</div>
+            <div class="fc-desc">ব্লাস্ট, নাবি ধ্বসা, অ্যানথ্রাকনোজ ইত্যাদির লক্ষণ ও প্রতিকার।</div>
+          </div>
+          <div class="feature-card" onclick="navigateTo('calculator')">
+            <div class="fc-icon">🧮</div>
+            <div class="fc-title">খরচ-লাভ ক্যালকুলেটর</div>
+            <div class="fc-desc">বীজ, সার, শ্রমিক, সেচের খরচ ও আনুমানিক বিক্রয় মূল্য থেকে নিট লাভ।</div>
+          </div>
+          <div class="feature-card" onclick="navigateTo('converter')">
+            <div class="fc-icon">📐</div>
+            <div class="fc-title">জমি পরিমাপক</div>
+            <div class="fc-desc">শতক, কাঠা, বিঘা, একর, হেক্টর রিয়েল-টাইম রূপান্তর।</div>
+          </div>
+          <div class="feature-card" onclick="navigateTo('glossary')">
+            <div class="fc-icon">🔤</div>
+            <div class="fc-title">A-Z কৃষি জ্ঞানভাণ্ডার</div>
+            <div class="fc-desc">BARI, BRRI, IPM, GAP, pH সহ ২০০+ কৃষি শব্দের অভিধান।</div>
+          </div>
+        </div>
+
+        <div class="section-title">📊 বাংলাদেশ কৃষি — এক নজরে</div>
+        <div class="card-grid card-grid-4">
+          <div class="stat-card"><div class="stat-icon">🌾</div><div class="stat-value">৩য়</div><div class="stat-label">বিশ্বে ধান উৎপাদক</div></div>
+          <div class="stat-card"><div class="stat-icon">🥔</div><div class="stat-value">৭ম</div><div class="stat-label">বিশ্বে আলু উৎপাদক</div></div>
+          <div class="stat-card"><div class="stat-icon">🟡</div><div class="stat-value">২য়</div><div class="stat-label">বিশ্বে পাট উৎপাদক</div></div>
+          <div class="stat-card"><div class="stat-icon">🫖</div><div class="stat-value">৯ম</div><div class="stat-label">বিশ্বে চা উৎপাদক</div></div>
+        </div>
+        <p class="text-muted mt-2" style="font-size:0.8rem">উৎস: <a href="https://en.wikipedia.org/wiki/Agriculture_in_Bangladesh" target="_blank">Wikipedia — Agriculture in Bangladesh</a></p>
+      </div>
+
+      <!-- ===== CROP ENCYCLOPEDIA PAGE ===== -->
+      <div class="page" id="page-encyclopedia">
+        <h1 class="page-title">📖 ক্রপ এনসাইক্লোপিডিয়া</h1>
+        <p class="page-subtitle" id="cropCount">ফসল লোড হচ্ছে...</p>
+        <div class="filter-bar">
+          <input type="text" class="filter-input" id="cropSearch" placeholder="🔍 ফসল খুঁজুন..." oninput="filterCrops()" style="flex:1;min-width:200px">
+          <select class="filter-select" id="filterSeason" onchange="filterCrops()">
+            <option value="">সব মৌসুম</option>
+            <option value="রবি">রবি (শীত)</option>
+            <option value="খরিপ-১">খরিপ-১</option>
+            <option value="খরিপ-২">খরিপ-২</option>
+            <option value="বারোমাসি">বারোমাসি</option>
+          </select>
+          <select class="filter-select" id="filterDistrict" onchange="filterCrops()">
+            <option value="">সব জেলা</option>
+          </select>
+        </div>
+        <div class="card-grid card-grid-3" id="encyclopediaGrid"></div>
+      </div>
+
+      <!-- ===== MARKETPLACE PAGE ===== -->
+      <div class="page" id="page-marketplace">
+        <h1 class="page-title">🛒 পাইকারি কৃষি বাজার</h1>
+        <p class="page-subtitle">ফসলের সরাসরি পাইকারি দর ও মজুদ পরিমাণ</p>
+        <div class="card-grid card-grid-3" id="marketplaceGrid"></div>
+      </div>
+
+      <!-- ===== INVOICE PAGE ===== -->
+      <div class="page" id="page-invoice">
+        <h1 class="page-title">🧾 ক্যাশ মেমো জেনারেটর</h1>
+        <p class="page-subtitle">প্রিন্টযোগ্য রসিদ তৈরি করুন</p>
+        <div class="card">
+          <div class="grid-cols-2">
+            <div class="calc-group"><label class="calc-label">চালান নম্বর</label><input type="text" class="calc-input" id="invNo" placeholder="INV-001"></div>
+            <div class="calc-group"><label class="calc-label">তারিখ</label><input type="date" class="calc-input" id="invDate"></div>
+            <div class="calc-group"><label class="calc-label">বিক্রেতার নাম</label><input type="text" class="calc-input" id="invSeller" placeholder="কৃষক/বিক্রেতার নাম"></div>
+            <div class="calc-group"><label class="calc-label">ক্রেতার নাম</label><input type="text" class="calc-input" id="invBuyer" placeholder="ক্রেতার নাম"></div>
+          </div>
+          <h3 class="mt-2">পণ্যের তালিকা</h3>
+          <table class="data-table">
+            <thead><tr><th>পণ্যের বিবরণ</th><th>পরিমাণ</th><th>একক মূল্য (৳)</th><th>মোট (৳)</th><th></th></tr></thead>
+            <tbody id="invoiceItems">
+              <tr id="invRow-1">
+                <td><input type="text" class="calc-input" placeholder="পণ্যের নাম" oninput="calcInvoice()"></td>
+                <td><input type="number" class="calc-input" placeholder="০" oninput="calcInvoice()" style="width:80px"></td>
+                <td><input type="text" class="calc-input" placeholder="৳০" oninput="calcInvoice()" style="width:100px"></td>
+                <td class="inv-subtotal" style="font-weight:600;text-align:right">৳০</td>
+                <td><button class="btn btn-sm" onclick="removeInvoiceRow('invRow-1')">✕</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-sm mt-1" onclick="addInvoiceRow()">➕ নতুন সারি</button>
+          <div class="calc-result mt-2">
+            <div class="result-label">মোট মূল্য</div>
+            <div class="result-value" id="invoiceTotal">৳০</div>
+          </div>
+          <button class="btn btn-primary btn-block mt-2" onclick="generateInvoice()">🖨️ প্রিন্টযোগ্য রসিদ তৈরি করুন</button>
+        </div>
+      </div>
+
+
+
+      <!-- ===== ARTICLES PAGE ===== -->
+      <div class="page" id="page-articles">
+        <h1 class="page-title">📚 কৃষি গবেষণা নিবন্ধ</h1>
+        <p class="page-subtitle">BARI, BRRI ও DAE বিজ্ঞানীদের লিখিত বৈজ্ঞানিক নিবন্ধ</p>
+        <div class="card-grid card-grid-2" id="articlesGrid"></div>
+      </div>
+
+      <!-- ===== HANDBOOK PAGE ===== -->
+      <div class="page" id="page-handbook">
+        <h1 class="page-title">📘 সরকারী কৃষি ডায়েরি বই</h1>
+        <p class="page-subtitle">DAE ও AIS নির্দেশিত অফিসিয়াল কৃষি গাইড</p>
+        <div id="handbookContent"></div>
+      </div>
+
+      <!-- ===== PLANNER PAGE ===== -->
+      <div class="page" id="page-planner">
+        <h1 class="page-title">🎯 স্মার্ট ফসল প্ল্যানার</h1>
+        <p class="page-subtitle">আপনার জমির জন্য সবচেয়ে লাভজনক ফসল নির্বাচন করুন</p>
+        <div class="card">
+          <div class="grid-cols-2">
+            <div class="calc-group"><label class="calc-label">জেলা</label>
+              <select class="calc-select" id="plDistrict">
+                <option value="">-- নির্বাচন করুন --</option>
+              </select>
+            </div>
+            <div class="calc-group"><label class="calc-label">মৌসুম</label>
+              <select class="calc-select" id="plSeason">
+                <option value="">-- যেকোনো --</option>
+                <option value="রবি">রবি (শীত)</option>
+                <option value="খরিপ-১">খরিপ-১</option>
+                <option value="খরিপ-২">খরিপ-২</option>
+                <option value="বারোমাসি">বারোমাসি</option>
+              </select>
+            </div>
+            <div class="calc-group"><label class="calc-label">জমির পরিমাণ</label><input type="number" class="calc-input" id="plArea" placeholder="যেমন: ৫০"></div>
+            <div class="calc-group"><label class="calc-label">একক</label>
+              <select class="calc-select" id="plUnit">
+                <option value="shotok">শতক (Decimal)</option>
+                <option value="katha">কাঠা</option>
+                <option value="bigha">বিঘা</option>
+                <option value="acre">একর</option>
+                <option value="hectare">হেক্টর</option>
+              </select>
+            </div>
+            <div class="calc-group"><label class="calc-label">মাটির ধরন</label>
+              <select class="calc-select" id="plSoil">
+                <option value="">-- যেকোনো --</option>
+                <option value="কর্দমাক্ত">কর্দমাক্ত (Clay)</option>
+                <option value="দোঁআশ">দোঁআশ (Loam)</option>
+                <option value="বেলে দোঁআশ">বেলে দোঁআশ (Sandy Loam)</option>
+                <option value="বেলে">বেলে (Sandy)</option>
+              </select>
+            </div>
+            <div class="calc-group"><label class="calc-label">সেচ সুবিধা</label>
+              <select class="calc-select" id="plIrrigation">
+                <option value="">-- যেকোনো --</option>
+                <option value="high">উচ্চ (সেচ সহজ)</option>
+                <option value="medium">মাঝারি</option>
+                <option value="low">কম (বৃষ্টি নির্ভর)</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block mt-2" onclick="runPlanner()">🎯 সেরা ফসল খুঁজুন</button>
+        </div>
+        <div id="plannerResult"></div>
+      </div>
+
+      <!-- ===== TIMELINE PAGE ===== -->
+      <div class="page" id="page-timeline">
+        <h1 class="page-title">📅 চাষাবাদ টাইমলাইন</h1>
+        <p class="page-subtitle">১ম দিন থেকে ফসল কাটা পর্যন্ত প্রতিটি ধাপে করণীয়</p>
+        <div id="timelineContent"></div>
+      </div>
+
+      <!-- ===== CALCULATOR PAGE ===== -->
+      <div class="page" id="page-calculator">
+        <h1 class="page-title">🧮 খরচ ও লাভ হিসাব ক্যালকুলেটর</h1>
+        <p class="page-subtitle">মোট খরচ ও আনুমানিক বিক্রয় মূল্য থেকে নিট লাভের পরিমাপ</p>
+        <div class="card">
+          <h3 style="margin-top:0">জমির তথ্য</h3>
+          <div class="grid-cols-2">
+            <div class="calc-group"><label class="calc-label">জমির পরিমাণ</label><input type="number" class="calc-input" id="calcArea" placeholder="যেমন: ১০০"></div>
+            <div class="calc-group"><label class="calc-label">একক</label>
+              <select class="calc-select" id="calcUnit">
+                <option value="shotok">শতক</option><option value="katha">কাঠা</option>
+                <option value="bigha">বিঘা</option><option value="acre">একর</option><option value="hectare">হেক্টর</option>
+              </select>
+            </div>
+          </div>
+          <h3>খরচের হিসাব (৳)</h3>
+          <div class="grid-cols-2">
+            <div class="calc-group"><label class="calc-label">বীজ খরচ</label><input type="number" class="calc-input" id="costSeed" placeholder="0" oninput="calcProfit()"></div>
+            <div class="calc-group"><label class="calc-label">সার খরচ</label><input type="number" class="calc-input" id="costFert" placeholder="0" oninput="calcProfit()"></div>
+            <div class="calc-group"><label class="calc-label">শ্রমিক খরচ</label><input type="number" class="calc-input" id="costLabor" placeholder="0" oninput="calcProfit()"></div>
+            <div class="calc-group"><label class="calc-label">সেচ খরচ</label><input type="number" class="calc-input" id="costIrrig" placeholder="0" oninput="calcProfit()"></div>
+            <div class="calc-group"><label class="calc-label">কীটনাশক খরচ</label><input type="number" class="calc-input" id="costPest" placeholder="0" oninput="calcProfit()"></div>
+            <div class="calc-group"><label class="calc-label">অন্যান্য খরচ</label><input type="number" class="calc-input" id="costOther" placeholder="0" oninput="calcProfit()"></div>
+          </div>
+          <h3>আয়ের হিসাব</h3>
+          <div class="grid-cols-2">
+            <div class="calc-group"><label class="calc-label">প্রতি একক বিক্রয় মূল্য (৳)</label><input type="number" class="calc-input" id="sellPrice" placeholder="0" oninput="calcProfit()"></div>
+            <div class="calc-group"><label class="calc-label">হেক্টর প্রতি ফলন</label><input type="number" class="calc-input" id="expYield" placeholder="0" oninput="calcProfit()"></div>
+          </div>
+          <div id="calcResult"></div>
+        </div>
+      </div>
+
+      <!-- ===== DIARY PAGE ===== -->
+      <div class="page" id="page-diary">
+        <h1 class="page-title">📔 কৃষি ডায়েরি (Land Notes)</h1>
+        <p class="page-subtitle">আপনার ব্যক্তিগত জমির খরচ ও কাজের নোট — LocalStorage এ সংরক্ষিত</p>
+        <div id="diaryContent"></div>
+      </div>
+
+      <!-- ===== MAP PAGE ===== -->
+      <div class="page" id="page-map">
+        <h1 class="page-title">🗺️ বাংলাদেশের ৬৪ জেলা ক্রপ ম্যাপ</h1>
+        <p class="page-subtitle">প্রতিটি জেলার প্রধান ফসল, মাটির ধরণ ও কৃষি তথ্য</p>
+        <div id="mapContent"></div>
+      </div>
+
+      <!-- ===== CALENDAR PAGE ===== -->
+      <div class="page" id="page-calendar">
+        <h1 class="page-title">📆 ১২ মাসের কৃষি ক্যালেন্ডার</h1>
+        <p class="page-subtitle">বৈশাখ থেকে চৈত্র — DAE নির্দেশিত মাসভিত্তিক কৃষি কাজ</p>
+        <div id="calendarContent"></div>
+      </div>
+
+      <!-- ===== EXPORT PAGE ===== -->
+      <div class="page" id="page-export">
+        <h1 class="page-title">🌍 কৃষি রপ্তানি গাইড</h1>
+        <p class="page-subtitle">EU ও মধ্যপ্রাচ্যে রপ্তানির ফাইটোস্যানিটারি প্রটোকল ও GlobalGAP স্ট্যান্ডার্ড</p>
+        <div id="exportContent"></div>
+      </div>
+
+      <!-- ===== DISEASES PAGE ===== -->
+      <div class="page" id="page-diseases">
+        <h1 class="page-title">🦠 রোগবালাই বিশ্বকোষ</h1>
+        <p class="page-subtitle">ফসলের প্রধান রোগের লক্ষণ, বাহক ও প্রতিকার</p>
+        <div id="diseasesContent"></div>
+      </div>
+
+      <!-- ===== PESTS PAGE ===== -->
+      <div class="page" id="page-pests">
+        <h1 class="page-title">🐛 পোকা-মাকড় বিশ্বকোষ</h1>
+        <p class="page-subtitle">ক্ষতিকর পোকার আক্রমণ ও জৈব বালাইনাশক প্রতিরোধ</p>
+        <div id="pestsContent"></div>
+      </div>
+
+      <!-- ===== TIMBER PAGE ===== -->
+      <div class="page" id="page-timber">
+        <h1 class="page-title">🌳 বৃক্ষ ও বনজ বিশ্বকোষ</h1>
+        <p class="page-subtitle">মেহগনি, সেগুন, নিম, অর্জুন ও বাঁশের চাষাবাদ ও অর্থনৈতিক মূল্য</p>
+        <div id="timberContent"></div>
+      </div>
+
+      <!-- ===== CONVERTER PAGE ===== -->
+      <div class="page" id="page-converter">
+        <h1 class="page-title">📐 জমি পরিমাপক ও রূপান্তরক</h1>
+        <p class="page-subtitle">শতক, কাঠা, বিঘা, একর, হেক্টর, কানি, গণ্ডা ও বর্গফুট</p>
+        <div class="card">
+          <div class="grid-cols-2">
+            <div class="calc-group"><label class="calc-label">পরিমাণ লিখুন</label><input type="number" class="calc-input" id="convValue" placeholder="যেমন: ১০০" oninput="convertLand()"></div>
+            <div class="calc-group"><label class="calc-label">একক</label>
+              <select class="calc-select" id="convFrom" onchange="convertLand()">
+                <option value="shotok">শতক (Decimal)</option>
+                <option value="katha">কাঠা</option>
+                <option value="bigha">বিঘা</option>
+                <option value="acre">একর</option>
+                <option value="hectare">হেক্টর</option>
+                <option value="sqft">বর্গফুট</option>
+                <option value="gonda">গণ্ডা</option>
+                <option value="kani">কানি</option>
+              </select>
+            </div>
+          </div>
+          <div id="convResult"></div>
+        </div>
+      </div>
+
+      <!-- ===== STORAGE PAGE ===== -->
+      <div class="page" id="page-storage">
+        <h1 class="page-title">📦 সংরক্ষণ প্রযুক্তি গাইড</h1>
+        <p class="page-subtitle">ফসলের সঠিক তাপমাত্রা, আর্দ্রতা ও সংরক্ষণ টেকনিক</p>
+        <div id="storageContent"></div>
+      </div>
+
+      <!-- ===== GLOSSARY PAGE ===== -->
+      <div class="page" id="page-glossary">
+        <h1 class="page-title">🔤 A-Z কৃষি জ্ঞানভাণ্ডার</h1>
+        <p class="page-subtitle">কৃষিবিজ্ঞান সম্পর্কিত শব্দসংক্ষেপ ও অভিধান</p>
+        <div id="glossaryContent"></div>
+      </div>
+
+
+
+    </main>
+  </div>
+</div>
+
+<!-- ===== CROP DETAIL MODAL ===== -->
+<div class="modal-overlay" id="cropModal" onclick="if(event.target===this)closeCropModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="cropModalTitle">—</span>
+      <button class="modal-close" onclick="closeCropModal()">✕</button>
+    </div>
+    <div class="modal-body" id="cropModalBody"></div>
+  </div>
+</div>
+
+<!-- ===== PWA INSTALL BANNER ===== -->
+<div class="pwa-banner" id="pwaBanner">
+  <span style="font-size:1.3rem">🌾</span>
+  <div style="font-size:0.85rem">
+    <strong>KrishiHub</strong> ইনস্টল করুন<br>
+    <span class="text-muted" style="font-size:0.75rem">অফলাইনে ব্যবহার করুন</span>
+  </div>
+  <button class="btn btn-primary btn-sm" id="pwaInstall">ইনস্টল</button>
+  <button class="btn btn-sm" id="pwaDismiss">✕</button>
+</div>
+
+<!-- ===== Scripts ===== -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+  // Populate district dropdowns on load
+  document.addEventListener('DOMContentLoaded', () => {
+    // District filters
+    document.querySelectorAll('#filterDistrict, #plDistrict').forEach(sel => {
+      if (sel && sel.id === 'filterDistrict') {
+        DISTRICTS.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d.en; opt.textContent = d.name;
+          sel.appendChild(opt);
+        });
+      } else if (sel && sel.id === 'plDistrict') {
+        DISTRICTS.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d.name; opt.textContent = `${d.name} (${d.div})`;
+          sel.appendChild(opt);
+        });
+      }
+    });
+    // Set today's date for invoice
+    const invDate = document.getElementById('invDate');
+    if (invDate) invDate.value = new Date().toISOString().split('T')[0];
+  });
+
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav">
+    <button class="bottom-nav-item active" data-page="home">
+      <span class="bnav-icon">🏠</span>
+      <span class="bnav-label">হোম</span>
+    </button>
+    <button class="bottom-nav-item" data-page="encyclopedia">
+      <span class="bnav-icon">📖</span>
+      <span class="bnav-label">ফসল</span>
+    </button>
+    <button class="bottom-nav-item" data-page="marketplace">
+      <span class="bnav-icon">🛒</span>
+      <span class="bnav-label">বাজার</span>
+    </button>
+    <button class="bottom-nav-item" data-page="planner">
+      <span class="bnav-icon">🎯</span>
+      <span class="bnav-label">প্ল্যানার</span>
+    </button>
+    <button class="bottom-nav-item" onclick="toggleSidebar()">
+      <span class="bnav-icon">☰</span>
+      <span class="bnav-label">মেনু</span>
+    </button>
+  </nav>
+
+</body>
+</html>
