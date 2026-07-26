@@ -64,8 +64,39 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initPWA();
   initLiveSync();
-  navigateTo('home');
+  initHistory();
 });
+
+function initHistory() {
+  const initialPage = location.hash ? location.hash.replace('#', '') : 'home';
+  navigateTo(initialPage, false);
+
+  window.addEventListener('popstate', (e) => {
+    // 1. If modal is open, close it
+    const modal = document.getElementById('cropModal');
+    if (modal && modal.classList.contains('active')) {
+      closeCropModal(false);
+      return;
+    }
+    // 2. If sidebar is open, close it
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar && sidebar.classList.contains('open')) {
+      toggleSidebar(false);
+      return;
+    }
+    // 3. Otherwise navigate to state page or hash or 'home'
+    const targetPage = (e.state && e.state.pageId) || (location.hash ? location.hash.replace('#', '') : 'home');
+    navigateTo(targetPage, false);
+  });
+}
+
+function goBack() {
+  if (window.history.state && window.history.state.pageId && window.history.state.pageId !== 'home') {
+    window.history.back();
+  } else {
+    navigateTo('home');
+  }
+}
 
 // ===== Theme =====
 function initTheme() {
@@ -117,24 +148,36 @@ function toggleSidebar(forceState) {
   }
 }
 
-function navigateTo(pageId) {
-  // update nav
+function navigateTo(pageId, pushState = true) {
+  if (!pageId) return;
+
+  // Push history state if requested
+  if (pushState && location.hash !== '#' + pageId) {
+    window.history.pushState({ pageId: pageId }, '', '#' + pageId);
+  }
+
+  // Update back button on header
+  const backBtn = document.getElementById('headerBackBtn');
+  if (backBtn) {
+    backBtn.style.display = pageId === 'home' ? 'none' : 'inline-flex';
+  }
+
+  // Update sidebar nav
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const navItem = document.querySelector(`.nav-item[data-page="${pageId}"]`);
   if (navItem) navItem.classList.add('active');
   
-  // update mobile bottom nav
+  // Update mobile bottom nav
   document.querySelectorAll('.bottom-nav-item').forEach(n => n.classList.remove('active'));
   const bnavItem = document.querySelector(`.bottom-nav-item[data-page="${pageId}"]`);
   if (bnavItem) bnavItem.classList.add('active');
 
-  // update pages
+  // Update pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const page = document.getElementById('page-' + pageId);
   if (page) {
     page.classList.add('active');
     App.currentPage = pageId;
-    // render page content
     renderPage(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
