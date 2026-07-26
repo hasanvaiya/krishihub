@@ -14,7 +14,7 @@ const DISTRICTS = [
   {div:'Dhaka',name:'মাদারীপুর',en:'Madaripur',crops:['ধান','পাট','সরিষা']},
   {div:'Dhaka',name:'মানিকগঞ্জ',en:'Manikganj',crops:['ধান','সরিষা','সবজি','পাট']},
   {div:'Dhaka',name:'মুন্সিগঞ্জ',en:'Munshiganj',crops:['আলু','ধান','সবজি']},
-  {div:'Dhaka',name:'ময়কেজিসিংহ',en:'Mymensingh',crops:['ধান','পাট','সবজি','সরিষা']},
+  {div:'Dhaka',name:'ময়মনসিংহ',en:'Mymensingh',crops:['ধান','পাট','সবজি','সরিষা']},
   {div:'Dhaka',name:'নারায়ণগঞ্জ',en:'Narayanganj',crops:['ধান','সবজি','পাট']},
   {div:'Dhaka',name:'নরসিংদী',en:'Narsingdi',crops:['ধান','সবজি','পান','লিচু']},
   {div:'Dhaka',name:'নেত্রকোনা',en:'Netrokona',crops:['ধান','পাট','সরিষা']},
@@ -177,7 +177,7 @@ const CROPS = [
     seed:'BARI Begun-1, 4, 5, 6, 8, 9, ISD006, BL114',
     disease:'ব্যাকটেরিয়াল উইল্ট, ফাইটোপথোরা',
     pest:'ডগা ও ফল ছিদ্রকারী পোকা (Shoot & Fruit Borer)',
-    ipm:'ফেরোকেজি ফাঁদ, প্রতিরোধী জাত (ISD006, BL114), আক্রান্ত ডগা-ফল সরিয়ে ধ্বংস'},
+    ipm:'ফেরোমোন ফাঁদ, প্রতিরোধী জাত (ISD006, BL114), আক্রান্ত ডগা-ফল সরিয়ে ধ্বংস'},
   
   {id:'tomato',name:'টমেটো',en:'Tomato',sci:'Solanum lycopersicum',cat:'vegetable',season:'রবি',dur:'১১০-১৩০ দিন',yield:'৪০-৬০ কেজি/হে',price:'৩০-৮০ ৳/কেজি',
     seed:'BARI Tomato-14, 15, 16, 17, 18, Rani',
@@ -334,7 +334,7 @@ const DISEASES = [
 const PESTS = [
   {name:'মাজরা পোকা',en:'Yellow Stem Borer',sci:'Scirpophaga incertulas',crop:'ধান',
     damage:'কাইচ থোড় অবস্থায় "ডেড হার্ট"; ছড়া বের হওয়ার পর "হোয়াইট হেড" (সাদা ছড়া)।',
-    control:'১) আলোক ফাঁদ (Light Trap) ২) পার্চিং (পাখি বসার জন্য কঞ্চি) ৩) ফেরোকেজি ফাঁদ ৪) ফুরাডান ৫G বা কার্বোফুরান ৩G মাটিতে প্রয়োগ ৫) কারটাপ ৫০SP স্প্রে।'},
+    control:'১) আলোক ফাঁদ (Light Trap) ২) পার্চিং (পাখি বসার জন্য কঞ্চি) ৩) ফেরোমোন ফাঁদ ৪) ফুরাডান ৫G বা কার্বোফুরান ৩G মাটিতে প্রয়োগ ৫) কারটাপ ৫০SP স্প্রে।'},
   {name:'বাদামী ঘাসফড়িং',en:'Brown Planthopper (BPH)',sci:'Nilaparvata lugens',crop:'ধান',
     damage:'গাছের গোড়ায় বসে রস চুষে খায়; "হপারবার্ন" – গোলাকার হলুদ থেকে বাদামী হয়ে যায়।',
     control:'১) প্রতিরোধী জাত (BRRI dhan82) ২) পানি নিষ্কাশন ৩) ইমিডাক্লোপ্রিড ২০SL (এডমায়ার) স্প্রে ৪) প্রাকৃতিক শত্রু (মাকড়সা) সংরক্ষণ।'},
@@ -343,10 +343,10 @@ const PESTS = [
     control:'১) হাত দিয়ে মুড়ানো পাতা সংগ্রহ ২) ট্রাইকোগ্রামা পরজীবী মাছি ছাড়া ৩) কারটাপ ৫০SP স্প্রে।'},
   {name:'ডগা ও ফল ছিদ্রকারী পোকা',en:'Shoot & Fruit Borer',sci:'Leucinodes orbonalis',crop:'বেগুন',
     damage:'কচি ডগা ছিদ্র করে ভিতরে খায়; ফলে ছিদ্র করে ঢোকে।',
-    control:'১) প্রতিরোধী জাত (ISD006, BL114, BL095) ২) ফেরোকেজি সেক্স ট্র্যাপ (পানি ফাঁদ) ৩) সপ্তাহে ১বার আক্রান্ত ডগা-ফল কেটে ধ্বংস ৪) প্রয়োজনে সাইপারমেথ্রিন ১০EC / কার্বোসালফান স্প্রে।'},
+    control:'১) প্রতিরোধী জাত (ISD006, BL114, BL095) ২) ফেরোমোন সেক্স ট্র্যাপ (পানি ফাঁদ) ৩) সপ্তাহে ১বার আক্রান্ত ডগা-ফল কেটে ধ্বংস ৪) প্রয়োজনে সাইপারমেথ্রিন ১০EC / কার্বোসালফান স্প্রে।'},
   {name:'ফল মাছি',en:'Fruit Fly',sci:'Bactrocera cucurbitae',crop:'কুমড়া, শশা, তরমুজ, আম',
     damage:'ফলে ডিম পাড়ে; শুঁয়োপোকা ফল খেয়ে পচিয়ে ফেলে।',
-    control:'১) ফেরোকেজি ফাঁদ (কিউলিউর) ২) মিষ্টি বিষটোপ (১ গ্রাম ডিপ্টেরেক্স ৮০SP + ১০০ গ্রাম গুড় + ১ লিটার পানি) ৩) মাটি চাষ করে পিউপা প্রকাশ।'},
+    control:'১) ফেরোমোন ফাঁদ (কিউলিউর) ২) মিষ্টি বিষটোপ (১ গ্রাম ডিপ্টেরেক্স ৮০SP + ১০০ গ্রাম গুড় + ১ লিটার পানি) ৩) মাটি চাষ করে পিউপা প্রকাশ।'},
   {name:'সাদা মাছি',en:'Whitefly',sci:'Bemisia tabaci',crop:'টমেটো, বেগুন, তুলা',
     damage:'পাতা থেকে রস চুষে খায়; ভাইরাস রোগ (লিফ কার্ল) ছড়ায়।',
     control:'১) হলুদ আঠালো ফাঁদ ২) নিম তেল স্প্রে ৩) ইমিডাক্লোপ্রিড / থায়ামেথক্সাম স্প্রে।'},
@@ -355,7 +355,7 @@ const PESTS = [
     control:'১) নিম নির্যাস ২) ইমিডাক্লোপ্রিড স্প্রে ৩) প্রতিরোধী জাত।'},
   {name:'ফল আর্মিওয়ার্ম',en:'Fall Armyworm',sci:'Spodoptera frugiperda',crop:'ভুট্টা',
     damage:'পাতা ছিদ্র করে খায়; কচি পাতা ও ছড়া নষ্ট করে।',
-    control:'১) ফেরোকেজি ফাঁদ ২) স্পিনোস্যাড / এমামেকটিন বেঞ্জোয়েট স্প্রে ৩) প্রাকৃতিক শত্রু।'},
+    control:'১) ফেরোমোন ফাঁদ ২) স্পিনোস্যাড / এমামেকটিন বেঞ্জোয়েট স্প্রে ৩) প্রাকৃতিক শত্রু।'},
   {name:'কাটুই পোকা',en:'Cutworm',sci:'Agrotis ipsilon',crop:'সবজি, আলু',
     damage:'রাতে ছোট চারা কেটে ফেলে।',
     control:'১) সন্ধ্যায় গম ভুষি + সেভিন ৮৫SP বিষটোপ ২) হাত দিয়ে সংগ্রহ ৩) জমি পরিষ্কার রাখা।'}
@@ -384,23 +384,23 @@ const GLOSSARY = [
   {term:'BARI',def:'Bangladesh Agricultural Research Institute — কৃষি গবেষণা ইনস্টিটিউট, গাজীপুর।'},
   {term:'BJRI',def:'Bangladesh Jute Research Institute — পাট গবেষণা ইনস্টিটিউট।'},
   {term:'BRRI',def:'Bangladesh Rice Research Institute — ধান গবেষণা ইনস্টিটিউট, গাজীপুর।'},
-  {term:'BINA',def:'Bangladesh Institute of Nuclear Agriculture — পারমাণবিক কৃষি ইনস্টিটিউট, ময়কেজিসিংহ।'},
+  {term:'BINA',def:'Bangladesh Institute of Nuclear Agriculture — পারমাণবিক কৃষি ইনস্টিটিউট, ময়মনসিংহ।'},
   {term:'BLB',def:'Bacterial Leaf Blight — ধানের ব্যাকটেরিয়াজনিত পাতা পোড়া রোগ।'},
   {term:'BPH',def:'Brown Planthopper — বাদামী ঘাসফড়িং।'},
   {term:'DAE',def:'Department of Agricultural Extension — কৃষি সম্প্রসারণ অধিদপ্তর।'},
   {term:'DAP',def:'Diammonium Phosphate — একটি নাইট্রোজেন-ফসফরাস সার।'},
-  {term:'EC',def:'Emulsifiable Concentrate — কীকেজিাশকের একটি ফর্মুলেশন।'},
+  {term:'EC',def:'Emulsifiable Concentrate — কীটনাশকের একটি ফর্মুলেশন।'},
   {term:'FRG',def:'Fertilizer Recommendation Guide — BARC কর্তৃক প্রকাশিত সার সুপারিশ নির্দেশিকা।'},
   {term:'GAP',def:'Good Agricultural Practices — উত্তম কৃষি পদ্ধতি।'},
   {term:'GlobalGAP',def:'আন্তর্জাতিক কৃষি সার্টিফিকেশন স্ট্যান্ডার্ড; রপ্তানির জন্য প্রয়োজন।'},
   {term:'HYV',def:'High Yielding Variety — উচ্চ ফলনশীল জাত।'},
-  {term:'IPM',def:'Integrated Pest Management — সকেজি্বিত বালাই ব্যবস্থাপনা।'},
-  {term:'INM',def:'Integrated Nutrient Management — সকেজি্বিত পুষ্টি ব্যবস্থাপনা।'},
+  {term:'IPM',def:'Integrated Pest Management — সমন্বিত বালাই ব্যবস্থাপনা।'},
+  {term:'INM',def:'Integrated Nutrient Management — সমন্বিত পুষ্টি ব্যবস্থাপনা।'},
   {term:'MoP / MP',def:'Muriate of Potash — পটাশ সার (KCl)।'},
   {term:'NARS',def:'National Agricultural Research System — জাতীয় কৃষি গবেষণা ব্যবস্থা।'},
   {term:'pH',def:'মাটির অম্লত্ব বা ক্ষারত্ব পরিমাপ। ফসল অনুযায়ী উপযুক্ত pH ৫.৫-৭.৫।'},
   {term:'SRDI',def:'Soil Resource Development Institute — মৃত্তিকা সম্পদ উন্নয়ন ইনস্টিটিউট।'},
-  {term:'SP',def:'Soluble Powder — পানিতে দ্রবণীয় গুঁড়ো (কীকেজিাশক)।'},
+  {term:'SP',def:'Soluble Powder — পানিতে দ্রবণীয় গুঁড়ো (কীটনাশক)।'},
   {term:'TSP',def:'Triple Super Phosphate — ফসফরাস সার।'},
   {term:'USG',def:'Urea Super Granule — গুটি ইউরিয়া।'},
   {term:'WP',def:'Wettable Powder — পানিতে মিশ্রণযোগ্য গুঁড়ো।'},
@@ -416,20 +416,41 @@ const HOTLINES = [
   {name:'BADC (কৃষি উন্নয়ন)',phone:'০২-৯১৩৬৪২৯',web:'badc.gov.bd'},
   {name:'SRDI (মৃত্তিকা সম্পদ)',phone:'০২-৪৮১১৭০৩২',web:'srdi.gov.bd'},
   {name:'BJRI (পাট গবেষণা)',phone:'০২-৯৩৪১৭৪৪',web:'bjri.gov.bd'},
-  {name:'BINA (পারমাণবিক কৃষি)',phone:'০৯১-৬৭৭৪১',web:'bina.gov.bd',addr:'ময়কেজিসিংহ'}
+  {name:'BINA (পারমাণবিক কৃষি)',phone:'০৯১-৬৭৭৪১',web:'bina.gov.bd',addr:'ময়মনসিংহ'}
 ];
 
-// ===== Sample Marketplace Data =====
-const MARKETPLACE = [
-  {product:'বোরো ধান (BRRI dhan29)',seller:'কৃষক সমবায়, বগুড়া',price:'১১৫০ ৳/কেজি',stock:'৫০০ কেজি',district:'বগুড়া'},
-  {product:'হিমসাগর আম',seller:'রাজশাহী ফল সমিতি',price:'১২০ ৳/কেজি',stock:'৩০ কেজি',district:'রাজশাহী'},
-  {product:'ডায়কেজি্ড আলু',seller:'মুন্সিগঞ্জ কৃষক লীগ',price:'২২ ৳/কেজি',stock:'১০০ কেজি',district:'মুন্সিগঞ্জ'},
-  {product:'সরিষা বীজ (BARI-14)',seller:'ফরিদপুর অ্যাগ্রো',price:'৮৫ ৳/কেজি',stock:'২০ কেজি',district:'ফরিদপুর'},
-  {product:'পেঁয়াজ (তাহেরপুরি)',seller:'পাবনা মার্কেটিং',price:'৭৫ ৳/কেজি',stock:'৪০ কেজি',district:'পাবনা'},
-  {product:'ভুট্টা (Pacific-11)',seller:'দিনাজপুর কৃষি',price:'২৮ ৳/কেজি',stock:'৮০ কেজি',district:'দিনাজপুর'},
-  {product:'পাট (Tossa)',seller:'জামালপুর সমিতি',price:'২৮০০ ৳/কেজি',stock:'৬০ কেজি',district:'জামালপুর'},
-  {product:'মসুর ডাল',seller:'নাটোর অ্যাগ্রো',price:'১২৫ ৳/কেজি',stock:'১৫ কেজি',district:'নাটোর'}
+// ===== Seasonal Wholesale Marketplace Data =====
+const RAW_MARKETPLACE = [
+  // রবি মৌসুম (Rabi - Winter Crops)
+  {id:'boro_rice', product:'বোরো ধান (BRRI dhan29)', seller:'কৃষক সমবায়, বগুড়া', basePriceKg:32, stock:'৫০০ কেজি', district:'বগুড়া', season:'রবি (শীতকালীন)', category:'ধান-চাল'},
+  {id:'diamond_potato', product:'ডায়মন্ড আলু', seller:'মুন্সিগঞ্জ কৃষক সমিতি', basePriceKg:22, stock:'১০০০ কেজি', district:'মুন্সিগঞ্জ', season:'রবি (শীতকালীন)', category:'সবজি'},
+  {id:'mustard_seed', product:'সরিষা বীজ (BARI-14)', seller:'ফরিদপুর অ্যাগ্রো', basePriceKg:85, stock:'২০০ কেজি', district:'ফরিদপুর', season:'রবি (শীতকালীন)', category:'তৈলবীজ'},
+  {id:'taherpuri_onion', product:'তাহেরপুরি পেঁয়াজ', seller:'পাবনা ট্রেডার্স', basePriceKg:65, stock:'৪০০ কেজি', district:'পাবনা', season:'রবি (শীতকালীন)', category:'মশলা'},
+  {id:'red_garlic', product:'লাল রসুন (দেশি)', seller:'নাটোর ফার্মার্স', basePriceKg:110, stock:'২৫০ কেজি', district:'নাটোর', season:'রবি (শীতকালীন)', category:'মশলা'},
+  {id:'maize_corn', product:'ভুট্টা (Pacific-11)', seller:'দিনাজপুর কৃষি খামার', basePriceKg:28, stock:'৮০০ কেজি', district:'দিনাজপুর', season:'রবি (শীতকালীন)', category:'দানা শস্য'},
+  {id:'wheat_bari', product:'গম (BARI Gom-33)', seller:'রংপুর শস্য সমিতি', basePriceKg:38, stock:'৬০০ কেজি', district:'রংপুর', season:'রবি (শীতকালীন)', category:'দানা শস্য'},
+  {id:'lentil_dal', product:'মসুর ডাল (দেশি)', seller:'যশোর অ্যাগ্রো', basePriceKg:125, stock:'১৫০ কেজি', district:'যশোর', season:'রবি (শীতকালীন)', category:'ডাল'},
+  
+  // খরিপ-১ মৌসুম (Kharif-1 - Summer Crops)
+  {id:'tossa_jute', product:'তোষা পাট (Tossa Jute)', seller:'জামালপুর পাট সমিতি', basePriceKg:70, stock:'৬০০ কেজি', district:'জামালপুর', season:'খরিপ-১ (গ্রীষ্মকালীন)', category:'আঁশ'},
+  {id:'aush_rice', product:'আউশ ধান (BRRI dhan48)', seller:'কুমিল্লা কৃষক সংস্থা', basePriceKg:30, stock:'৪৫০ কেজি', district:'কুমিল্লা', season:'খরিপ-১ (গ্রীষ্মকালীন)', category:'ধান-চাল'},
+  {id:'ladyfinger', product:'ঢেঁড়শ (দেশি)', seller:'গাজীপুর কৃষি ফার্ম', basePriceKg:35, stock:'১৮০ কেজি', district:'গাজীপুর', season:'খরিপ-১ (গ্রীষ্মকালীন)', category:'সবজি'},
+  {id:'bitter_gourd', product:'করলা (উচ্ছে)', seller:'নরসিংদী গ্রিন ফার্ম', basePriceKg:45, stock:'১৫০ কেজি', district:'নরসিংদী', season:'খরিপ-১ (গ্রীষ্মকালীন)', category:'সবজি'},
+  {id:'sesame_seed', product:'তিল (BARI Til-4)', seller:'কুষ্টিয়া অ্যাগ্রো', basePriceKg:95, stock:'১২০ কেজি', district:'কুষ্টিয়া', season:'খরিপ-১ (গ্রীষ্মকালীন)', category:'তৈলবীজ'},
+
+  // খরিপ-২ মৌসুম (Kharif-2 - Monsoon Crops)
+  {id:'amon_rice', product:'আমন ধান (BRRI dhan87)', seller:'ময়মনসিংহ সমবায়', basePriceKg:34, stock:'৭০০ কেজি', district:'ময়মনসিংহ', season:'খরিপ-২ (বর্ষাকালীন)', category:'ধান-চাল'},
+  {id:'mashkalai', product:'মাসকালাই ডাল', seller:'চাঁপাই সমিতি', basePriceKg:115, stock:'১০০ কেজি', district:'চাঁপাই নবাবগঞ্জ', season:'খরিপ-২ (বর্ষাকালীন)', category:'ডাল'},
+
+  // বারোমাসি (All-Season Crops)
+  {id:'brinjal_eggplant', product:'বেগুন (তাল বেগুন)', seller:'যশোর কৃষক সমিতি', basePriceKg:40, stock:'২০০ কেজি', district:'যশোর', season:'বারোমাসি', category:'সবজি'},
+  {id:'green_chili', product:'কাঁচামরিচ (দেশি)', seller:'বগুড়া ভেজিটেবল', basePriceKg:80, stock:'১০০ কেজি', district:'বগুড়া', season:'বারোমাসি', category:'মশলা'},
+  {id:'fresh_ginger', product:'দেশি আদা', seller:'পার্বত্য অ্যাগ্রো', basePriceKg:140, stock:'১৫০ কেজি', district:'রাঙ্গামাটি', season:'বারোমাসি', category:'মশলা'},
+  {id:'papaya_ripe', product:'পাকা পেঁপে', seller:'টাঙ্গাইল ফল সমিতি', basePriceKg:50, stock:'৩০০ কেজি', district:'টাঙ্গাইল', season:'বারোমাসি', category:'ফলমূল'},
+  {id:'sagar_banana', product:'সাগর কলা', seller:'নরসিংদী ফ্রুটস', basePriceKg:35, stock:'৪০০ কেজি', district:'নরসিংদী', season:'বারোমাসি', category:'ফলমূল'}
 ];
+
+const MARKETPLACE = RAW_MARKETPLACE;
 
 // ===== Workers Directory =====
 const WORKERS = [
@@ -437,7 +458,7 @@ const WORKERS = [
   {name:'আব্দুল করিম',type:'ছাঁটাই মেকানিক',district:'গাজীপুর',wage:'৮০০ ৳/দিন',phone:'০১৮১১-২৩৪৫৬৭',exp:'১০ বছর'},
   {name:'রফিকুল ইসলাম',type:'ট্রাক্টর ড্রাইভার',district:'বগুড়া',wage:'৭০০ ৳/দিন',phone:'০১৯১১-৩৪৫৬৭৮',exp:'১২ বছর'},
   {name:'সালমা বেগম',type:'বীজতলা শ্রমিক',district:'দিনাজপুর',wage:'৪০০ ৳/দিন',phone:'০১৭২১-৪৫৬৭৮৯',exp:'৮ বছর'},
-  {name:'জাকির হোসেন',type:'IPM ট্রেইনার',district:'ময়কেজিসিংহ',wage:'১২০০ ৳/দিন',phone:'০১৫১১-৫৬৭৮৯০',exp:'২০ বছর'},
+  {name:'জাকির হোসেন',type:'IPM ট্রেইনার',district:'ময়মনসিংহ',wage:'১২০০ ৳/দিন',phone:'০১৫১১-৫৬৭৮৯০',exp:'২০ বছর'},
   {name:'মাহবুবা আক্তার',type:'ফল সংগ্রহ শ্রমিক',district:'রাজশাহী',wage:'৪৫০ ৳/দিন',phone:'০১৬১১-৬৭৮৯০১',exp:'৬ বছর'}
 ];
 
@@ -446,22 +467,22 @@ const ARTICLES = [
   {title:'সুগন্ধি ধান চাষে লাভজনক প্রযুক্তি',author:'ড. আনসারুল হক, BRRI',date:'২০২৬',
     excerpt:'সুগন্ধি ধান (BRRI dhan38, 50, 70) দেশীয় ও বৈদেশিক বাজারে উচ্চ মূল্য পায়। সঠিক জাত নির্বাচন, সময়মতো রোপণ ও সুষম সার প্রয়োগে হেক্টর প্রতি ৪-৫ কেজি ফলন সম্ভব।'},
   {title:'IPM প্রযুক্তিতে বেগুন চাষ',author:'ড. রহমান, BARI',date:'২০২৬',
-    excerpt:'ডগা ও ফল ছিদ্রকারী পোকার আক্রমণ প্রতিরোধে গ্রাফটেড চারা, ফেরোকেজি ফাঁদ ও প্রতিরোধী জাত (ISD006) ব্যবহার করে ৭০% পর্যন্ত কীকেজিাশক ব্যবহার কমানো যায়।'},
+    excerpt:'ডগা ও ফল ছিদ্রকারী পোকার আক্রমণ প্রতিরোধে গ্রাফটেড চারা, ফেরোমোন ফাঁদ ও প্রতিরোধী জাত (ISD006) ব্যবহার করে ৭০% পর্যন্ত কীটনাশক ব্যবহার কমানো যায়।'},
   {title:'বাংলাদেশ থেকে আম রপ্তানি: সুযোগ ও চ্যালেঞ্জ',author:'LightCastle Partners',date:'২০২৬',
     excerpt:'বাংলাদেশ বিশ্বের ৮ম বৃহত্তম আম উৎপাদক। EU ও মধ্যপ্রাচ্যে রপ্তানির জন্য GlobalGAP, HACCP ও ISO সার্টিফিকেশন প্রয়োজন।'},
-  {title:'ফল আর্মিওয়ার্ম নিয়ন্ত্রণে সকেজি্বিত ব্যবস্থাপনা',author:'ড. মুরাদ, DAE',date:'২০২৬',
-    excerpt:'ভুট্টার প্রধান শত্রু ফল আর্মিওয়ার্ম নিয়ন্ত্রণে ফেরোকেজি ফাঁদ, প্রাকৃতিক শত্রু ও নিরাপদ কীকেজিাশক (স্পিনোস্যাড, এমামেকটিন) ব্যবহারের সুপারিশ।'},
+  {title:'ফল আর্মিওয়ার্ম নিয়ন্ত্রণে সমন্বিত ব্যবস্থাপনা',author:'ড. মুরাদ, DAE',date:'২০২৬',
+    excerpt:'ভুট্টার প্রধান শত্রু ফল আর্মিওয়ার্ম নিয়ন্ত্রণে ফেরোমোন ফাঁদ, প্রাকৃতিক শত্রু ও নিরাপদ কীটনাশক (স্পিনোস্যাড, এমামেকটিন) ব্যবহারের সুপারিশ।'},
   {title:'জিরো এনার্জি কুল চেম্বার: কৃষকের বিদ্যুৎ ছাড়া হিমাগার',author:'ড. সিদ্দিকা, BARI',date:'২০২৬',
     excerpt:'ইট, বালু ও পানি দিয়ে তৈরি ZECC ১০-১৫°C তাপমাত্রা ও ৯৫% আর্দ্রতা বজায় রাখে; আলু, টমেটো, আমের সংরক্ষণকাল ৩-১৫ দিন বৃদ্ধি করে।'}
 ];
 
 // ===== Export standards =====
 const EXPORT_STANDARDS = [
-  {product:'আম',markets:'EU, মধ্যপ্রাচ্য, রাশিয়া',standards:'GlobalGAP, HACCP, ফাইটোস্যানিটারি সার্টিফিকেট',packaging:'৪-৫ কেজি কার্কেজি, VHT (Vapor Heat Treatment)',
+  {product:'আম',markets:'EU, মধ্যপ্রাচ্য, রাশিয়া',standards:'GlobalGAP, HACCP, ফাইটোস্যানিটারি সার্টিফিকেট',packaging:'৪-৫ কেজি কার্টন, VHT (Vapor Heat Treatment)',
     docs:'ফাইটোস্যানিটারি সনদ (DAE), সার্টিফিকেট অফ অরিজিন, কমার্শিয়াল ইনভয়েস'},
   {product:'আলু',markets:'মালয়েশিয়া, শ্রীলঙ্কা, সিঙ্গাপুর',standards:'ব্রাউন রট মুক্ত সনদ, GlobalGAP',packaging:'৫০ কেজি জালি বস্তা',
     docs:'ফাইটোস্যানিটারি সনদ, প্যাকিং লিস্ট'},
-  {product:'পেয়ারা',markets:'মধ্যপ্রাচ্য, সিঙ্গাপুর',standards:'GAP, কীকেজিাশক অবশেষ পরীক্ষা',packaging:'২-৩ কেজি কার্কেজি'},
+  {product:'পেয়ারা',markets:'মধ্যপ্রাচ্য, সিঙ্গাপুর',standards:'GAP, কীটনাশক অবশেষ পরীক্ষা',packaging:'২-৩ কেজি কার্টন'},
   {product:'সবজি',markets:'EU, UK, মধ্যপ্রাচ্য',standards:'GlobalGAP, MRL (Maximum Residue Limit) মান',packaging:'ভ্যাকুয়াম প্যাক / MAP'}
 ];
 
