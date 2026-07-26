@@ -1253,10 +1253,20 @@ async function fetchLiveData(isAuto = false) {
     }
   }
 
-  // Build Ticker Message
+  // Build Ticker Message & Update Header Weather Pill
   const weatherText = Object.keys(liveWeatherData).length 
     ? Object.entries(liveWeatherData).map(([city, w]) => `🌤️ ${city}: ${w.temp}°C (আর্দ্রতা ${w.humidity}%)`).join(' | ')
     : '🌤️ ঢাকা: ২৯.৪°C (আর্দ্রতা ৬৫%) | 🌤️ রাজশাহী: ৩১.০°C (রৌদ্রোজ্জ্বল) | 🌤️ রংপুর: ২৮.৫°C (আংশিক মেঘলা)';
+
+  const dhakaWeather = liveWeatherData['ঢাকা'];
+  const hwTemp = document.getElementById('hwTemp');
+  const hwLoc = document.getElementById('hwLoc');
+  if (hwTemp && dhakaWeather) {
+    hwTemp.textContent = `${dhakaWeather.temp}°C`;
+  }
+  if (hwLoc) {
+    hwLoc.textContent = 'ঢাকা';
+  }
 
   const marketText = typeof PRODUCTS !== 'undefined' 
     ? PRODUCTS.map(p => `${p.product}: ${p.price} ${p.trend || ''}`).join(' | ')
