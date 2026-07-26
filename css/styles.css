@@ -368,6 +368,43 @@ a:hover { color: var(--accent-hover); }
   align-items: center;
   gap: 10px;
 }
+.header-weather-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  padding: 4px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-xs);
+  white-space: nowrap;
+}
+.header-weather-pill:hover {
+  background: var(--accent-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.header-weather-pill .hw-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.header-weather-pill .hw-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.header-weather-pill .hw-temp {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+.header-weather-pill .hw-loc {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-weight: 600;
+}
 .header-btn {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
