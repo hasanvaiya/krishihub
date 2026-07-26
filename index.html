@@ -116,6 +116,14 @@
         <input type="text" id="globalSearch" placeholder="ফসল খুঁজুন... (বাংলা/English/Scientific)">
       </div>
       <div class="header-actions">
+        <!-- Compact Live Weather Pill Widget -->
+        <div class="header-weather-pill" id="headerWeatherPill" onclick="navigateTo('home')" title="লাইভ আবহাওয়া তথ্য">
+          <span class="hw-icon">🌤️</span>
+          <div class="hw-info">
+            <span class="hw-temp" id="hwTemp">২৯.৪°C</span>
+            <span class="hw-loc" id="hwLoc">ঢাকা</span>
+          </div>
+        </div>
         <button class="header-btn" onclick="navigateTo('encyclopedia')">📖 এনসাইক্লোপিডিয়া</button>
         <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="থিম পরিবর্তন">🌙</button>
       </div>
