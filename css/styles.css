@@ -315,6 +315,30 @@ a:hover { color: var(--accent-hover); }
 }
 .menu-toggle:hover { background: var(--bg-tertiary); }
 
+.header-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-xs);
+}
+.header-back-btn:hover {
+  background: var(--accent-light);
+  transform: translateX(-2px);
+}
+.header-back-btn:active {
+  transform: scale(0.95);
+}
+
 .header-search {
   flex: 1;
   max-width: 480px;
